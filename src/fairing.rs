@@ -1,7 +1,7 @@
 use lazy_static::lazy_static;
 use rocket::{
     fairing::{Fairing, Info, Kind},
-    http::{hyper::header::CONTENT_ENCODING, Header, MediaType},
+    http::{hyper::header::{CONTENT_ENCODING, CACHE_CONTROL}, Header, MediaType},
     tokio::{
         io::{AsyncRead, ReadBuf},
         sync::RwLock,
@@ -228,6 +228,10 @@ impl Fairing for CachedCompression {
         response.set_header(Header::new(
             CONTENT_ENCODING.as_str(),
             format!("{}", encoding),
+        ));
+        response.set_header(Header::new(
+            CACHE_CONTROL.as_str(),
+            "max-age=31536000"
         ));
         response.set_sized_body(compressed_body.len(), Cursor::new(compressed_body.clone()));
 
