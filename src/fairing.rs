@@ -24,7 +24,6 @@ lazy_static! {
         MediaType::parse_flexible("application/zip").unwrap(),
         MediaType::parse_flexible("image/*").unwrap(),
         MediaType::parse_flexible("video/*").unwrap(),
-        MediaType::parse_flexible("application/wasm").unwrap(),
         MediaType::parse_flexible("application/octet-stream").unwrap(),
     ];
     static ref CACHED_FILES: RwLock<HashMap<(String, CachedEncoding), &'static [u8]>> = {
@@ -45,7 +44,6 @@ lazy_static! {
 /// - `application/zip`
 /// - `image/*`
 /// - `video/*`
-/// - `application/wasm`
 /// - `application/octet-stream`
 ///
 /// # Usage
